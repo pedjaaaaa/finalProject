@@ -11,6 +11,8 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
+    "dev": "concurrently --kill-others \"heroku local\" \"npm run start --prefix ./client\"",
+    "postinstall": "npm install --prefix ./server && npm install --prefix ./client && npm run build --prefix ./client",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
