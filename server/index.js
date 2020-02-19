@@ -20,6 +20,10 @@ const io = socketio(server);//socket.io instance created => this is the backend
 io.on('connection', (socket) => {//(socket) will connected as a client side socket
     console.log('Connection is on....');
 
+    socket.on('join', ({ name, room }, callback) => {
+        console.log(name, room);
+    });
+
     //disconnect, no socket parameter needed because client left
     socket.on('disconnect', () => {
         console.log('User had left!');
@@ -32,12 +36,3 @@ app.use(router);
 
 server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
-
-// https://socket.io/get-started/chat/
-//This will run when we have a client connection on our io instance when client joining and leaving our chat room
-// io.on('connection', function(socket){
-//     console.log('a user connected');
-//     socket.on('disconnect', function(){
-//       console.log('user disconnected');
-//     });
-//   });
