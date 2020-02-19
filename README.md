@@ -1,6 +1,6 @@
 # finalProject
 * CHAT-APP
-* creating a client side
+*** creating a client side ***
 npx create-react-app client => creating a project app
 
 * install dependencies for client-side
@@ -26,11 +26,10 @@ import App from './App'; //import App component from App.js file
 //react will import all the code that we write inside the div with this id 'root' in public/index.html
 ReactDOM.render(<App />, document.getElementById('root'));
 ===========================================================================
-
+* App.js
 client/src/index.js => initiate react application
 client/src/App.js => set up initial project structure
 create 2 components that instructed in the App.js(Join, Chat)
-
 
 * creating components folders
 src/components/Join/Join.js
@@ -38,7 +37,7 @@ src/components/Join/Join.css
 src/components/Chat/Chat.js
 src/components/Chat/Chat.css
 ======================================================================================================================================
-* creating a server side
+*** creating a server side ***
 make a server folder in the finalProject-master
 mkdir server
 cd server
