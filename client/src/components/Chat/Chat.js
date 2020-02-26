@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import BottomBar from '../BottomBar/BottomBar';
 import './Chat.css';
 
+// test>
+
 class Chat extends React.Component {
   constructor(props) {
     super(props);
