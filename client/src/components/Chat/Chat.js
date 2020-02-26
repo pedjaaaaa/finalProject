@@ -1,78 +1,116 @@
-import React, { useState, useEffect } from 'react';
-import queryString from 'query-string';//retrieving data from the URL
+import React from 'react';
+import config from '../../config';
 import io from 'socket.io-client';
 
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
+import BottomBar from '../BottomBar/BottomBar';
 import './Chat.css';
-import InfoBar from '../InfoBar/InfoBar';
 
-let socket;
+class Chat extends React.Component {
+  constructor(props) {
+    super(props);
 
-const Chat = ({ location }) => { //{ location } =>this is a prop
-    const [name, setName] = useState('');
-    const [room, setRoom] = useState('');
+    this.state = {
+      chat: [],
+      content: '',
+      name: '',
+    };
+  }
 
-    const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([]);
+  componentDidMount() {
+    this.socket = io(config[process.env.NODE_ENV].endpoint);
 
-    const ENDPOINT = 'localhost:5000';
+    // Load the last 10 messages in the window.
+    this.socket.on('init', (msg) => {
+      this.setState((state) => ({
+        chat: [...state.chat, ...msg.reverse()],
+      }), this.scrollToBottom);
+    });
 
-    // // https://reactjs.org/docs/hooks-effect.html
-    //useEffect is a hooks that let you use lifecycle methods side effects in function components
-    useEffect(() => {
+    // Update the chat if a new message is broadcasted.
+    this.socket.on('push', (msg) => {
+      this.setState((state) => ({
+        chat: [...state.chat, msg],
+      }), this.scrollToBottom);
+    });
+  }
 
-        //retrieve data that users entered while joining(name,room)
-        const { name, room } = queryString.parse(location.search);
+  // Save the message the user is typing in the input field.
+  handleContent(event) {
+    this.setState({
+      content: event.target.value,
+    });
+  }
 
-         socket = io(ENDPOINT);
+  //
+  handleName(event) {
+    this.setState({
+      name: event.target.value,
+    });
+  }
 
-         setName(name);
-         setRoom(room);
+  // When the user is posting a new message.
+  handleSubmit(event) {
+    console.log(event);
 
-        //  https://socket.io/get-started/chat/#Emitting-events
-         socket.emit('join', { name, room }, () => {
+    // Prevent the form to reload the current page.
+    event.preventDefault();
 
-         });
+    this.setState((state) => {
+      console.log(state);
+      console.log('this', this.socket);
+      // Send the new message to the server.
+      this.socket.emit('message', {
+        name: state.name,
+        content: state.content,
+      });
 
-         return () => {
-             //disconnect effect
-             socket.emit('disconnect')//disconnect must be same name with backend on server/index.js
+      // Update the chat with the user's message and remove the current message.
+      return {
+        chat: [...state.chat, {
+          name: state.name,
+          content: state.content,
+        }],
+        content: '',
+      };
+    }, this.scrollToBottom);
+  }
 
-             socket.off();
-         }
+  // Always make sure the window is scrolled down to the last message.
+  scrollToBottom() {
+    const chat = document.getElementById('chat');
+    chat.scrollTop = chat.scrollHeight;
+  }
 
-         console.log(socket);
-    },[ENDPOINT, location.search]);
-    // ==============================================================================================================================
-    //useEffect for handling messages
-    useEffect(() => {
-        socket.on('message', (message) =>{
-            setMessages([...messages, message]);
-        })
-    }, [messages]);
-
-    const sendMessage = (event) => {
-        event.preventDefault();
-
-        if(message) {
-            socket.emit('sendMessage', message, () => setMessage(''));
-        }
-    }
-
-    console.log(message, messages);
-
-    //================================================================================================================================
+  render() {
     return (
-        <div className="outerContainer">
-            <div className="container"> 
-                {/* <input value={message} 
-                onChange={(event) => setMessage(event.target.value)}
-                onKeyPress={event => event.key === 'Enter' ? sendMessage(event) : null}
-                /> */}
-
-                <InfoBar room= {room} />
-            </div>
-        </div>
-    )
-}
+      <div className="App">
+        <Paper id="chat" elevation={3}>
+          {this.state.chat.map((el, index) => {
+            return (
+              <div key={index}>
+                <Typography variant="caption" className="name">
+                  {el.name}
+                </Typography>
+                <Typography variant="body1" className="content">
+                  {el.content}
+                </Typography>
+              </div>
+            );
+          })}
+        </Paper>
+        <BottomBar
+          content={this.state.content}
+          handleContent={this.handleContent.bind(this)}
+          handleName={this.handleName.bind(this)}
+          handleSubmit={this.handleSubmit.bind(this)}
+          name={this.state.name}
+        />
+      </div>
+    );
+  }
+};
 
 export default Chat;
