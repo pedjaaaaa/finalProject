@@ -1,43 +1,50 @@
-//Setting up server
-//require(importing) all necessary dependencies
 const express = require('express');
-const socketio = require('socket.io');
-const http = require('http');
-
-const PORT = process.env.PORT || 5000;
-
-//require router
-const router = require('./router');
-
-//Setting up socket.io
-//https://socket.io/docs/#Using-with-Node-http-server
 const app = express();
-const server = http.createServer(app);
-const io = socketio(server);//socket.io instance created => this is the backend
+const http = require('http').Server(app);
+const path = require('path');
+const io = require('socket.io')(http);
 
-// https://socket.io/get-started/chat/
-//This will run when we have a client connection on our io instance when client joining and leaving our chat room
-io.on('connection', (socket) => {//(socket) will connected as a client side socket
-    console.log('Connection is on....');
+const uri = process.env.MONGODB_URI;
+const port = process.env.PORT || 5000;
 
-    //disconnect, no socket parameter needed because client left
-    socket.on('disconnect', () => {
-        console.log('User had left!');
-    })
+const Message = require('./Message');
+const mongoose = require('mongoose');
+
+mongoose.connect(uri, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
 });
 
+app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
-//Call router as a middleware
-app.use(router);
+io.on('connection', (socket) => {
 
-server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+  // Get the last 10 messages from the database.
+  Message.find().sort({createdAt: -1}).limit(10).exec((err, messages) => {
+    if (err) return console.error(err);
 
+    // Send the last messages to the user.
+    socket.emit('init', messages);
+  });
 
-// https://socket.io/get-started/chat/
-//This will run when we have a client connection on our io instance when client joining and leaving our chat room
-// io.on('connection', function(socket){
-//     console.log('a user connected');
-//     socket.on('disconnect', function(){
-//       console.log('user disconnected');
-//     });
-//   });
+  // Listen to connected users for a new message.
+  socket.on('message', (msg) => {
+    // Create a message with the content and the name of the user.
+    const message = new Message({
+      content: msg.content,
+      name: msg.name,
+    });
+
+    // Save the message to the database.
+    message.save((err) => {
+      if (err) return console.error(err);
+    });
+
+    // Notify all other users about a new message.
+    socket.broadcast.emit('push', msg);
+  });
+});
+
+http.listen(port, () => {
+  console.log('listening on *:' + port);
+});

@@ -1,0 +1,35 @@
+{
+  "name": "finalProject",
+  "version": "1.0.0",
+  "description": "* CHAT-APP * creating a client side npx create-react-app client => creating a project app",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "formik": "^2.1.4",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-router-dom": "^5.1.2",
+    "socket.io-client": "^2.3.0",
+    "bootstrap": "^4.4.1",
+    "yup": "^0.28.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "dev": "concurrently --kill-others \"heroku local\" \"npm run start --prefix ./client\"",
+    "postinstall": "npm install --prefix ./server && npm install --prefix ./client && npm run build --prefix ./client",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedjaaaaa/finalProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedjaaaaa/finalProject/issues"
+  },
+  "homepage": "https://github.com/pedjaaaaa/finalProject#readme"
+}
