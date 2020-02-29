@@ -6,4 +6,8 @@ router.get('/', (req, res) => {
     res.send('Server is running...');
 });
 
+router.get('/api/chat', (req, res) => {
+    res.json();
+})
+
 module.exports = router;

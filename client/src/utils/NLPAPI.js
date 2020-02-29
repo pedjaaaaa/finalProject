@@ -1,10 +1,10 @@
 import axios from "axios";
-const BASEURL = "api.giphy.com/v1/gifs/search";
-const APIKey = "J5dNYggytT7tnI3dF9pmQCVZpg8Btui3";
-const NPLQuery = "";
+const BASEURL = "https://smartchat12.cognitiveservices.azure.com/";
+const APIKey = "3fb3da1ec5674af9a5b32c280e6cf6db";
+
 
 export default {
-  search: function() {
-    return axios.get(BASEURL + NPLQuery + APIKey);
+  searchNLP: function(content) {
+    return axios.get(BASEURL + content + APIKey);
   }
 };

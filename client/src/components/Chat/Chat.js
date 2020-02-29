@@ -1,14 +1,12 @@
 import React from 'react';
 import config from '../../config';
 import io from 'socket.io-client';
-
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
 import BottomBar from '../BottomBar/BottomBar';
 import './Chat.css';
-
-// test>
+import NLPAPI from "../../utils/NLPAPI";
+import GiphyAPI from "../../utils/GiphyAPI";
 
 class Chat extends React.Component {
   constructor(props) {
@@ -18,8 +16,17 @@ class Chat extends React.Component {
       chat: [],
       content: '',
       name: '',
+      firstcall: '',
     };
   }
+
+  // APIsearch = query => {
+  //   NLPAPI.searchNLP(query)
+  //     .then(res => 
+  //       console.log(res)
+  //       )
+  //     .catch(err => console.log(err));
+  // };
 
   componentDidMount() {
     this.socket = io(config[process.env.NODE_ENV].endpoint);
@@ -56,9 +63,10 @@ class Chat extends React.Component {
   // When the user is posting a new message.
   handleSubmit(event) {
     console.log(event);
-
     // Prevent the form to reload the current page.
     event.preventDefault();
+
+    // this.APIsearch(this.state.firstcall);
 
     this.setState((state) => {
       console.log(state);
@@ -74,8 +82,11 @@ class Chat extends React.Component {
         chat: [...state.chat, {
           name: state.name,
           content: state.content,
+          firstcall: state.firstcall,
         }],
+        firstcall: state.content,
         content: '',
+        
       };
     }, this.scrollToBottom);
   }
