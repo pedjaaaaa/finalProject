@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 
 const Message = require('./models/Messages');
 const mongoose = require('mongoose');
-const router = express.Router();
+// const router = express.Router();
 
 
 mongoose.connect(uri, {
@@ -47,12 +47,11 @@ io.on('connection', (socket) => {
   });
 });
 
-router.use(function (req, res, next) {
-  next()
-})
+// router.use(function (req, res, next) {
+//   next()
+// })
 
-app.use('/', router);
-require("./routes/apiRoutes")(router);
+app.use(require("./routes/apiRoutes"));
 
 http.listen(port, () => {
   console.log('listening on *:' + port);

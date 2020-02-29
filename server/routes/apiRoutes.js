@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const Messages = require("../models/Messages");
 
-router.post("/api/chat", ({ body }, res) => {
-  Messages.create(body)
+router.get("/api/chat", (req, res) => {
+  Messages.find({})
     .then(msg => {
       res.json(msg);
       console.log(msg);
@@ -11,3 +11,5 @@ router.post("/api/chat", ({ body }, res) => {
       res.status(400).json(err);
     });
 });
+
+module.exports = router;
