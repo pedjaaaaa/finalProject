@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Join from './components/Join/Join';
 import joinNavbar from './components/joinNavbar/joinNavbar';
+import joinImage from  './components/joinImage/joinImage';
 import Chat from './components/Chat/Chat';
 
 //creating App.js compoment
@@ -16,8 +17,10 @@ const App = () => (
 
         <Route path = "/" exact component = { joinNavbar } />
         <Route path = "/" exact component = { Join } />
+        <Route path = "/" exact component = { joinImage } />
         <Route path = "/chat" exact component = { Chat } />
     </Router>
 );
 
-export default App;//export the component to available for use in another files
+//export the component to available for use in another files
+export default App;

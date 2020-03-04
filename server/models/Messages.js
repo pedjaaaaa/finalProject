@@ -9,6 +9,6 @@ const messageSchema = new mongoose.Schema({
 
 // module.exports = mongoose.model('Messages', messageSchema);
 
-const Messages = mongoose.model("Messages", transactionSchema);
+const Messages = mongoose.model("Messages", messageSchema);
 
 module.exports = Messages;

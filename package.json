@@ -4,12 +4,15 @@
   "description": "* CHAT-APP * creating a client side npx create-react-app client => creating a project app",
   "main": "index.js",
   "dependencies": {
+    "@google-cloud/language": "^3.8.0",
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
     "formik": "^2.1.4",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-router-dom": "^5.1.2",
     "socket.io-client": "^2.3.0",
-    "bootstrap": "^4.4.1",
     "yup": "^0.28.1"
   },
   "devDependencies": {

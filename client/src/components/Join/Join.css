@@ -4,8 +4,14 @@
   margin-top: 30vh;
   margin-left: 10vw;
   width: 15vw;
+  
+  
 }
-
+.loginImage {
+  column-width: 70pt;
+  
+  float: right;
+}
 #introTitle {
   font-family: 'Spartan', sans-serif;
   font-weight: bold;

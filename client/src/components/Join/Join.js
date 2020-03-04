@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';//this link is used to link to our /chat path
 
 import './Join.css';
+import mac13 from '../../icons/mac13.png'; 
 
 //name, setter function to pass name state
 //room, setter function to pass room state
@@ -12,6 +13,7 @@ const Join = () => {
     const [name, setName] = useState('');//pass the name state in the empty string
     const [room, setRoom] = useState('');
     return (
+        <div>
         <div className="loginRoomBox">
             <h2 id="introTitle">App name</h2>
             <h3 id="introSubtitle">subheader goes here</h3>
@@ -22,7 +24,12 @@ const Join = () => {
             {/* link to chat application */}
             <Link onClick={event => (!name || !room) ? event.preventDefault() : null} to={`/chat?name=${name} & room=${room}`}>
                 <button className="button mt-20" type="submit">Join</button>
-            </Link>
+            </Link>            
+            </div>
+
+          <div className="loginImage">
+              <img  src = {mac13}></img>
+         </div>  
         </div>
     )
 }

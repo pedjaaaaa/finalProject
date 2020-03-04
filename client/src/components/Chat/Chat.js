@@ -1,7 +1,7 @@
 import React from 'react';
 import config from '../../config';
 import io from 'socket.io-client';
-import Paper from '@material-ui/core/Paper';
+import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import BottomBar from '../BottomBar/BottomBar';
 import './Chat.css';
@@ -19,17 +19,8 @@ class Chat extends React.Component {
       chat: [],
       content: '',
       name: '',
-      firstcall: '',
     };
   }
-
-  // APIsearch = query => {
-  //   NLPAPI.searchNLP(query)
-  //     .then(res => 
-  //       console.log(res)
-  //       )
-  //     .catch(err => console.log(err));
-  // };
 
   componentDidMount() {
     this.socket = io(config[process.env.NODE_ENV].endpoint);
@@ -69,8 +60,6 @@ class Chat extends React.Component {
     // Prevent the form to reload the current page.
     event.preventDefault();
 
-    // this.APIsearch(this.state.firstcall);
-
     this.setState((state) => {
       console.log(state);
       console.log('this', this.socket);
@@ -87,7 +76,6 @@ class Chat extends React.Component {
           content: state.content,
           firstcall: state.firstcall,
         }],
-        firstcall: state.content,
         content: '',
         
       };
