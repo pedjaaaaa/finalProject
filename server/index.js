@@ -7,8 +7,9 @@ const io = require('socket.io')(http);
 const uri = process.env.MONGODB_URI;
 const port = process.env.PORT || 5000;
 
-const Message = require('./Message');
+const Message = require('./models/Messages');
 const mongoose = require('mongoose');
+
 
 mongoose.connect(uri, {
   useUnifiedTopology: true,
@@ -44,6 +45,8 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('push', msg);
   });
 });
+
+app.use(require("./routes/apiRoutes"));
 
 http.listen(port, () => {
   console.log('listening on *:' + port);

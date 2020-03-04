@@ -1,14 +1,12 @@
 import React from 'react';
 import config from '../../config';
 import io from 'socket.io-client';
-
-import Paper from '@material-ui/core/Paper';
+import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-
 import BottomBar from '../BottomBar/BottomBar';
 import './Chat.css';
-
-// test>
+import NLPAPI from "../../utils/NLPAPI";
+import GiphyAPI from "../../utils/GiphyAPI";
 
 class Chat extends React.Component {
   constructor(props) {
@@ -56,7 +54,6 @@ class Chat extends React.Component {
   // When the user is posting a new message.
   handleSubmit(event) {
     console.log(event);
-
     // Prevent the form to reload the current page.
     event.preventDefault();
 
@@ -74,8 +71,10 @@ class Chat extends React.Component {
         chat: [...state.chat, {
           name: state.name,
           content: state.content,
+          firstcall: state.firstcall,
         }],
         content: '',
+        
       };
     }, this.scrollToBottom);
   }
