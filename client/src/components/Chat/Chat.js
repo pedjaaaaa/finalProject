@@ -5,11 +5,17 @@ import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import BottomBar from '../BottomBar/BottomBar';
 import './Chat.css';
+<<<<<<< HEAD
 // //esline-disable-next-line
 // import NLPAPI from "../../utils/NLPAPI";
 // //esline-disable-next-line
 // import GiphyAPI from "../../utils/GiphyAPI";
 // //esline-disable-next-line
+=======
+import GiphyAPI from "../../utils/GiphyAPI";
+import axios from "axios";
+
+>>>>>>> f41225da46e75cb40fedd542ee6586ffd63f391b
 
 class Chat extends React.Component {
   constructor(props) {
@@ -22,7 +28,15 @@ class Chat extends React.Component {
     };
   }
 
+  googleCall() {
+    axios.get("/api/nlp/?chat=" + this.state.content)
+      .then(res => {
+        console.log(res);
+      })
+  }
+
   componentDidMount() {
+
     this.socket = io(config[process.env.NODE_ENV].endpoint);
 
     // Load the last 10 messages in the window.
@@ -68,7 +82,8 @@ class Chat extends React.Component {
         name: state.name,
         content: state.content,
       });
-
+      this.googleCall();
+      
       // Update the chat with the user's message and remove the current message.
       return {
         chat: [...state.chat, {
@@ -77,7 +92,7 @@ class Chat extends React.Component {
           firstcall: state.firstcall,
         }],
         content: '',
-        
+
       };
     }, this.scrollToBottom);
   }

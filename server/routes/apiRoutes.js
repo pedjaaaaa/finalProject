@@ -22,8 +22,11 @@ router.get("/api/chat", (req, res) => {
 });
 
 router.get("/api/nlp", (req, res) => {
-    queryNLP("Kobe Bryant");
-    // res.json()
+    queryNLP(req.query.chat)
+    .then(ans => {
+        console.log(ans);
+        res.json(ans);
+    })
 })
 
 module.exports = router;
