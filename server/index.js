@@ -46,7 +46,12 @@ io.on('connection', (socket) => {
   });
 });
 
-app.use(require("./routes/apiRoutes"));
+router.use(function (req, res, next) {
+  next()
+})
+
+// app.use(require("./routes/apiRoutes"));
+app.use(require('./routes/apiRoutes'));
 
 http.listen(port, () => {
   console.log('listening on *:' + port);
