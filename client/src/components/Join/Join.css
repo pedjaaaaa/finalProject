@@ -1,17 +1,28 @@
 @import url('https://fonts.googleapis.com/css?family=Spartan&display=swap');
 
+.container {
+  margin-top: 20vh; 
+  margin-left: 8vw; 
+  width: 100%;
+}
 .loginRoomBox {
-  margin-top: 30vh;
-  margin-left: 10vw;
-  width: 15vw;
-  
-  
+  width: 20%;
+  float: left;
 }
 .loginImage {
-  column-width: 70pt;
-  
+  display: inline-block;
+}
+
+.mac {
+  margin-top: -60vh;
+  width: 70%;
   float: right;
 }
+
+.blankSpace {
+  
+}
+
 #introTitle {
   font-family: 'Spartan', sans-serif;
   font-weight: bold;

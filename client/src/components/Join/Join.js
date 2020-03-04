@@ -13,7 +13,7 @@ const Join = () => {
     const [name, setName] = useState('');//pass the name state in the empty string
     const [room, setRoom] = useState('');
     return (
-        <div>
+        <div className="container"> 
         <div className="loginRoomBox">
             <h2 id="introTitle">App name</h2>
             <h3 id="introSubtitle">subheader goes here</h3>
@@ -26,10 +26,13 @@ const Join = () => {
                 <button className="button mt-20" type="submit">Join</button>
             </Link>            
             </div>
-
+            <div className="loginImage">
+              
+          </div>   
           <div className="loginImage">
-              <img  src = {mac13}></img>
-         </div>  
+              {/* <img src = "https://i.picsum.photos/id/101/200/300.jpg"></img> */}
+              <img className = "mac" src = {mac13}></img>
+          </div>  
         </div>
     )
 }
