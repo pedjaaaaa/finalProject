@@ -5,7 +5,6 @@ import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import BottomBar from '../BottomBar/BottomBar';
 import './Chat.css';
-import NLPAPI from "../../utils/NLPAPI";
 import GiphyAPI from "../../utils/GiphyAPI";
 
 class Chat extends React.Component {

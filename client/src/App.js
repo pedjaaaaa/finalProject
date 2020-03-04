@@ -18,4 +18,5 @@ const App = () => (
     </Router>
 );
 
-export default App;//export the component to available for use in another files
+//export the component to available for use in another files
+export default App;
