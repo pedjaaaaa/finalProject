@@ -9,7 +9,6 @@ const port = process.env.PORT || 5000;
 
 const Message = require('./models/Messages');
 const mongoose = require('mongoose');
-// const router = express.Router();
 
 
 mongoose.connect(uri, {
@@ -46,10 +45,6 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('push', msg);
   });
 });
-
-// router.use(function (req, res, next) {
-//   next()
-// })
 
 app.use(require("./routes/apiRoutes"));
 
