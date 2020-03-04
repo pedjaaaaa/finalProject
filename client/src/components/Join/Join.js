@@ -1,5 +1,5 @@
 //{useState} => This is a hooks for using state inside of the function for based components
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';//this link is used to link to our /chat path
 
