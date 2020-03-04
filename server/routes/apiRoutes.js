@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
 router.get("/api/chat", (req, res) => {
     console.log("api/chat");
-  Messages.findall({})
+  Messages.find({})
     .then(msg => {
       res.json(msg);
       console.log(msg);
