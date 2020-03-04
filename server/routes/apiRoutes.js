@@ -14,7 +14,7 @@ router.get("/api/chat", (req, res) => {
   Messages.find({})
     .then(msg => {
       res.json(msg);
-      console.log(msg);
+      console.log(res.json());
     })
     .catch(err => {
       res.status(400).json(err);
