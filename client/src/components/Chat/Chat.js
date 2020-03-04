@@ -5,8 +5,11 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import BottomBar from '../BottomBar/BottomBar';
 import './Chat.css';
-import NLPAPI from "../../utils/NLPAPI";
-import GiphyAPI from "../../utils/GiphyAPI";
+// //esline-disable-next-line
+// import NLPAPI from "../../utils/NLPAPI";
+// //esline-disable-next-line
+// import GiphyAPI from "../../utils/GiphyAPI";
+// //esline-disable-next-line
 
 class Chat extends React.Component {
   constructor(props) {

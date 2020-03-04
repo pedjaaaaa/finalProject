@@ -4,6 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Join from './components/Join/Join';
+import joinNavbar from './components/joinNavbar/joinNavbar';
 import Chat from './components/Chat/Chat';
 
 //creating App.js compoment
@@ -13,6 +14,7 @@ const App = () => (
     <Router>
         {/* This router has two routes: root path, and Chat path */}
 
+        <Route path = "/" exact component = { joinNavbar } />
         <Route path = "/" exact component = { Join } />
         <Route path = "/chat" exact component = { Chat } />
     </Router>
