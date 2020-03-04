@@ -17,6 +17,7 @@ class Chat extends React.Component {
       chat: [],
       content: '',
       name: '',
+      gif: '',
     };
   }
 
@@ -24,8 +25,20 @@ class Chat extends React.Component {
     axios.get("/api/nlp/?chat=" + this.state.content)
       .then(res => {
         console.log(res);
+        if (res.data.length >= 1) {
+        this.GiphySearch(res.data[0].name);
+        }
       })
   }
+
+  GiphySearch = query => {
+    GiphyAPI.search(query)
+      .then(res => {
+        this.setState({ gif: res.data.data.image_original_url })
+        console.log(res.data.data);
+      })
+      .catch(err => console.log(err));
+  };
 
   componentDidMount() {
 
@@ -81,9 +94,10 @@ class Chat extends React.Component {
         chat: [...state.chat, {
           name: state.name,
           content: state.content,
-          firstcall: state.firstcall,
+          processed: state.processed,
         }],
         content: '',
+        processed: '',
 
       };
     }, this.scrollToBottom);
@@ -112,6 +126,7 @@ class Chat extends React.Component {
             );
           })}
         </Paper>
+        <img src={this.state.gif} alt="gif"></img>
         <BottomBar
           content={this.state.content}
           handleContent={this.handleContent.bind(this)}
