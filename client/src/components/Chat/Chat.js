@@ -46,13 +46,8 @@ class Chat extends React.Component {
         this.setState((state) => ({
           chat: [...state.chat, gifObj],
         }), this.scrollToBottom);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
         console.log(gifObj);
->>>>>>> 1f52b7c75bef2e94d3b285fc5129fc4bb7afce02
-=======
->>>>>>> f08b565dd2ac9c2503f4634040126b35974b4c1a
       })
       .catch(err => console.log(err));
   };
