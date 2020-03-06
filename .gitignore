@@ -25,3 +25,5 @@ yarn-error.log*
 
 #Google key
 /config
+
+keyFile.json
