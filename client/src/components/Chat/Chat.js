@@ -26,7 +26,11 @@ class Chat extends React.Component {
       .then(res => {
         console.log(res);
         if (res.data.length >= 1) {
+<<<<<<< HEAD
         this.GiphySearch(res.data[0].name);
+=======
+          this.GiphySearch(res.data[0].name);
+>>>>>>> 1f52b7c75bef2e94d3b285fc5129fc4bb7afce02
         }
       })
   }
@@ -36,7 +40,11 @@ class Chat extends React.Component {
       .then(res => {
         console.log(res.data.data);
         const gif = res.data.data.image_original_url;
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 1f52b7c75bef2e94d3b285fc5129fc4bb7afce02
         this.setState({ gif })
 
         const gifObj = {
@@ -47,6 +55,10 @@ class Chat extends React.Component {
         this.setState((state) => ({
           chat: [...state.chat, gifObj],
         }), this.scrollToBottom);
+<<<<<<< HEAD
+=======
+        console.log(gifObj);
+>>>>>>> 1f52b7c75bef2e94d3b285fc5129fc4bb7afce02
       })
       .catch(err => console.log(err));
   };
@@ -100,7 +112,7 @@ class Chat extends React.Component {
         content: state.content,
       });
       this.googleCall();
-      
+
       // Update the chat with the user's message and remove the current message.
       return {
         chat: [...state.chat, {
@@ -124,16 +136,30 @@ class Chat extends React.Component {
       <div className="App">
         <Paper id="chat" elevation={3}>
           {this.state.chat.map((el, index) => {
-            return (
-              <div key={index}>
-                <Typography variant="caption" className="name">
-                  {el.name}
-                </Typography>
-                <Typography variant="body1" className="content">
-                  {el.content}
-                </Typography>
-              </div>
-            );
+            // if (this.state.gif.length >= 1) {
+            //   return (
+            //     <div key={index}>
+            //       <Typography variant="caption" className="name">
+            //         {el.name}
+            //       </Typography>
+            //       <Typography variant="body1" className="content">
+            //         {el.content}
+            //       </Typography>
+            //       <img src={this.state.gif} alt="gif"></img>
+            //     </div>
+            //   )
+            // } else {
+              return (
+                <div key={index}>
+                  <Typography variant="caption" className="name">
+                    {el.name}
+                  </Typography>
+                  <Typography variant="body1" className="content">
+                    {el.content}
+                  </Typography>
+                </div>
+              );
+            // }
           })}
         </Paper>
         <img src={this.state.gif} alt="gif"></img>
