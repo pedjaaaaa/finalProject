@@ -34,8 +34,19 @@ class Chat extends React.Component {
   GiphySearch = query => {
     GiphyAPI.search(query)
       .then(res => {
-        this.setState({ gif: res.data.data.image_original_url })
         console.log(res.data.data);
+        const gif = res.data.data.image_original_url;
+      
+        this.setState({ gif })
+
+        const gifObj = {
+          name: "giphy",
+          content: gif
+        };
+
+        this.setState((state) => ({
+          chat: [...state.chat, gifObj],
+        }), this.scrollToBottom);
       })
       .catch(err => console.log(err));
   };
@@ -56,6 +67,7 @@ class Chat extends React.Component {
       this.setState((state) => ({
         chat: [...state.chat, msg],
       }), this.scrollToBottom);
+      console.log(msg);
     });
   }
 
@@ -94,10 +106,8 @@ class Chat extends React.Component {
         chat: [...state.chat, {
           name: state.name,
           content: state.content,
-          processed: state.processed,
         }],
         content: '',
-        processed: '',
 
       };
     }, this.scrollToBottom);
