@@ -46,10 +46,6 @@ io.on('connection', (socket) => {
   });
 });
 
-router.use(function (req, res, next) {
-  next()
-})
-
 // app.use(require("./routes/apiRoutes"));
 app.use(require('./routes/apiRoutes'));
 
