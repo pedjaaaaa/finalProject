@@ -126,7 +126,6 @@ class Chat extends React.Component {
       <div className="App">
         <Paper id="chat" elevation={3}>
           {this.state.chat.map((el, index) => {
-
               return (
                 <div key={index}>
                   <Typography variant="caption" className="name">
@@ -138,7 +137,6 @@ class Chat extends React.Component {
                   <img src={el.gif} alt="gif"></img>
                 </div>
               )
-        
           })}
         </Paper>
         {/* <img src={this.state.gif} alt="gif"></img> */}
