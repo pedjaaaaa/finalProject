@@ -34,6 +34,7 @@ io.on('connection', (socket) => {
     const message = new Message({
       content: msg.content,
       name: msg.name,
+      gif: msg.gif,
     });
 
     // Save the message to the database.
