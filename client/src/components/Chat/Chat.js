@@ -125,19 +125,19 @@ class Chat extends React.Component {
       <div className="App">
         <Paper id="chat" elevation={3}>
           {this.state.chat.map((el, index) => {
-            // if (this.state.gif.length >= 1) {
-            //   return (
-            //     <div key={index}>
-            //       <Typography variant="caption" className="name">
-            //         {el.name}
-            //       </Typography>
-            //       <Typography variant="body1" className="content">
-            //         {el.content}
-            //       </Typography>
-            //       <img src={this.state.gif} alt="gif"></img>
-            //     </div>
-            //   )
-            // } else {
+            if (this.state.gif.length >= 1) {
+              return (
+                <div key={index}>
+                  <Typography variant="caption" className="name">
+                    {el.name}
+                  </Typography>
+                  <Typography variant="body1" className="content">
+                    {el.content}
+                  </Typography>
+                  <img src={this.state.gif} alt="gif"></img>
+                </div>
+              )
+            } else {
               return (
                 <div key={index}>
                   <Typography variant="caption" className="name">
@@ -148,7 +148,7 @@ class Chat extends React.Component {
                   </Typography>
                 </div>
               );
-            // }
+            }
           })}
         </Paper>
         <img src={this.state.gif} alt="gif"></img>
