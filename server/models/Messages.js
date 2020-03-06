@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const messageSchema = new mongoose.Schema({
   content: String,
   name: String,
+  gif: String,
 }, {
   timestamps: true,
 });

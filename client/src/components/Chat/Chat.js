@@ -41,13 +41,12 @@ class Chat extends React.Component {
 
         const gifObj = {
           name: "giphy",
-          content: gif
+          // content: gif
         };
 
         this.setState((state) => ({
           chat: [...state.chat, gifObj],
         }), this.scrollToBottom);
-        console.log(gifObj);
       })
       .catch(err => console.log(err));
   };
@@ -99,6 +98,7 @@ class Chat extends React.Component {
       this.socket.emit('message', {
         name: state.name,
         content: state.content,
+        gif: state.gif,
       });
       this.googleCall();
 
@@ -107,6 +107,7 @@ class Chat extends React.Component {
         chat: [...state.chat, {
           name: state.name,
           content: state.content,
+          gif: state.gif,
         }],
         content: '',
 
@@ -125,19 +126,7 @@ class Chat extends React.Component {
       <div className="App">
         <Paper id="chat" elevation={3}>
           {this.state.chat.map((el, index) => {
-            // if (this.state.gif.length >= 1) {
-            //   return (
-            //     <div key={index}>
-            //       <Typography variant="caption" className="name">
-            //         {el.name}
-            //       </Typography>
-            //       <Typography variant="body1" className="content">
-            //         {el.content}
-            //       </Typography>
-            //       <img src={this.state.gif} alt="gif"></img>
-            //     </div>
-            //   )
-            // } else {
+
               return (
                 <div key={index}>
                   <Typography variant="caption" className="name">
@@ -146,12 +135,13 @@ class Chat extends React.Component {
                   <Typography variant="body1" className="content">
                     {el.content}
                   </Typography>
+                  <img src={el.gif} alt="gif"></img>
                 </div>
-              );
-            // }
+              )
+        
           })}
         </Paper>
-        <img src={this.state.gif} alt="gif"></img>
+        {/* <img src={this.state.gif} alt="gif"></img> */}
         <BottomBar
           content={this.state.content}
           handleContent={this.handleContent.bind(this)}
